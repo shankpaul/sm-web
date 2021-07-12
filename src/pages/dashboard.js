@@ -11,24 +11,23 @@ import {
   Link
 } from "react-router-dom";
 
-
 export default function Dashboard(){
 	return(
 		<div>
-			<Topbar />
-			<Sidebar />
-			<MainArea>
-				<Router>
+			<Router>
+				<Topbar />
+				<Sidebar />
+				<MainArea>				
 					<Switch>
 						<PrivateRoute path="/services">
-			        <Services />
-			      </PrivateRoute>
-			      <PrivateRoute path="/">
-			        Main
-			      </PrivateRoute>
-		      </Switch>
-	      </Router>
-			</MainArea>
+				       <Services />
+				    </PrivateRoute>
+				    <PrivateRoute path="/">
+				      Main
+				    </PrivateRoute>
+			    </Switch>	    
+				</MainArea>
+			</Router>
 		</div>
 	)
 }
