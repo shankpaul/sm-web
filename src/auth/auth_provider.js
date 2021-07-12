@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext, useState, useEffect} from 'react';
 import axios from 'axios';
 
 
@@ -22,11 +22,20 @@ function useAuth() {
   return useContext(authContext);
 }
 
+function initUser(){
+	return JSON.parse(localStorage.getItem('user'))
+}
+
 function useAuthProvider(){
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState(initUser);
+	useEffect(()=>{
+		localStorage.setItem('user',JSON.stringify(user));
+	},[user]);
+
+	
 
 	const signIn = function(email, password, cb) {
-	 	axios.post('auth/sign_in',{email: email, password: password})
+		axios.post('auth/sign_in',{email: email, password: password})
          .then(function(resp){   
          let data = (resp.data.data); 	
           data['headers']=resp.headers

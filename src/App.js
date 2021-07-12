@@ -1,6 +1,7 @@
 import './App.css';
 import LoginPage from './pages/loginpage'
 import Dashboard from './pages/dashboard'
+import PrivateRoute from './components/private_route'
 import {AuthProvider, useAuth} from './auth/auth_provider'
 import {
   BrowserRouter as Router,
@@ -33,21 +34,6 @@ function App() {
     </AuthProvider>
     );
 }
-
-
-function PrivateRoute({children, ...rest}){
-  let auth = useAuth();
-  return(
-    <Route {...rest} 
-    render={({location}) => 
-      auth.user ? (children) : (<Redirect to={{ pathname: "/login", state: { from: location }}} />)
-    }
-    ></Route>
-  )
-
-}
-
-
 
 
 export default App;
