@@ -3,19 +3,16 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation
+  Link
 } from "react-router-dom";
 
 export default function Sidebar(){
 	return(		
-		<div class="sidenav">
-			<a href="#about">About</a>
-			<a href="#services">Services</a>
-			<a href="#clients">Clients</a>
-			<a href="#contact">Contact</a>
+		<div className="sidenav">
+			<Router>
+				<Link to="/">Main</Link>
+				<Link to="/services">Home</Link>
+			</Router>
 		</div>
 	);
 }

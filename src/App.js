@@ -1,7 +1,7 @@
 import './App.css';
 import LoginPage from './pages/loginpage'
 import Dashboard from './pages/dashboard'
-import PrivateRoute from './components/private_route'
+import PrivateRoute from './components/privateroute'
 import {AuthProvider, useAuth} from './auth/auth_provider'
 import {
   BrowserRouter as Router,
