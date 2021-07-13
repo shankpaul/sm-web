@@ -1,37 +1,33 @@
-import React from 'react';
+import React,{useReducer} from 'react';
 import {Table} from 'react-bootstrap';
+import ServiceReducer,{initialState} from '../reducers/service_reducer'
 
 export default function Services() {
+	const [services, dispatch] = useReducer(ServiceReducer, initialState());
 
 	return(
 		<div>
 			<Table striped bordered hover size="sm">
 			  <thead>
 			    <tr>
-			      <th>#</th>
-			      <th>First Name</th>
-			      <th>Last Name</th>
-			      <th>Username</th>
+			      <th>Date</th>
+			      <th>Vehicle No</th>
+			      <th>Complaint</th>
+			      <th>Status</th>
+			      <th>Delivery Date</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr>
-			      <td>1</td>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			  {[].map((service)=> {
+			  	<tr key={service.id}>
+			      <td>{service.check_in_at}</td>
+			      <td>{service.vehicle.vin}</td>
+			      <td>{service.complaint}</td>
+			      <td>{service.status}</td>
+			      <td>{service.expected_delivery_date_}</td>
 			    </tr>
-			    <tr>
-			      <td>2</td>
-			      <td>Jacob</td>
-			      <td>Thornton</td>
-			      <td>@fat</td>
-			    </tr>
-			    <tr>
-			      <td>3</td>
-			      <td colSpan="2">Larry the Bird</td>
-			      <td>@twitter</td>
-			    </tr>
+			  })}
+			    
 			  </tbody>
 			</Table>
 		</div>

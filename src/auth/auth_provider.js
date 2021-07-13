@@ -1,7 +1,6 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
 import axios from 'axios';
 
-
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.headers.common["Api-key"] = process.env.REACT_APP_API_KEY
@@ -17,7 +16,6 @@ function AuthProvider({children}){
 	)
 }
 
-// its ahelper to use created context
 function useAuth() {
   return useContext(authContext);
 }
@@ -30,17 +28,23 @@ function useAuthProvider(){
 	const [user, setUser] = useState(initUser);
 	useEffect(()=>{
 		localStorage.setItem('user',JSON.stringify(user));
+		if(user)
+		{
+			axios.defaults.headers.common["Access-token"] = user.headers['access-token']
+			axios.defaults.headers.common["Client"] =user.headers['client']
+			axios.defaults.headers.common["Uid"] = user.headers['uid']
+		}
 	},[user]);
 
 	
 
-	const signIn = function(email, password, cb) {
+	const signIn = function(email, password, callback) {
 		axios.post('auth/sign_in',{email: email, password: password})
          .then(function(resp){   
          let data = (resp.data.data); 	
           data['headers']=resp.headers
           setUser(data)
-          cb();
+          callback();
          })
          .catch(function (error) {
             return error;
