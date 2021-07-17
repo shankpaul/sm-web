@@ -13,8 +13,6 @@ import {
   useLocation
 } from "react-router-dom";
 
-
-
 function App() {
   return (
     <AuthProvider>

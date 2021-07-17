@@ -25,6 +25,9 @@ export default function Dashboard(){
 				    <PrivateRoute path="/">
 				      Main
 				    </PrivateRoute>
+				    <PrivateRoute path="/">
+				      Main
+				    </PrivateRoute>
 			    </Switch>	    
 				</MainArea>
 			</Router>

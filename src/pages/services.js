@@ -1,12 +1,25 @@
-import React,{useReducer} from 'react';
-import {Table} from 'react-bootstrap';
-import ServiceReducer,{initialState} from '../reducers/service_reducer'
+import React,{useReducer, useEffect} from 'react';
+import {Table, Button} from 'react-bootstrap';
+import ServiceReducer from '../reducers/service_reducer'
+import axios from 'axios';
+import Service from '../components/service'
+import { Link } from "react-router-dom";
+
+const initialState = {
+	services: []
+}
 
 export default function Services() {
-	const [services, dispatch] = useReducer(ServiceReducer, initialState());
+	const [state, dispatch ] = useReducer(ServiceReducer, initialState);
+	useEffect(()=> {
+		axios.get('services').then((resp) => {
+			dispatch({type: 'index', payload: resp.data})
+		});
+	}, [])
 
 	return(
 		<div>
+			<Link to="/service/add" className='btn btn-primary'>Add Service</Link>
 			<Table striped bordered hover size="sm">
 			  <thead>
 			    <tr>
@@ -15,19 +28,11 @@ export default function Services() {
 			      <th>Complaint</th>
 			      <th>Status</th>
 			      <th>Delivery Date</th>
+			      <th>Actions</th>
 			    </tr>
 			  </thead>
-			  <tbody>
-			  {[].map((service)=> {
-			  	<tr key={service.id}>
-			      <td>{service.check_in_at}</td>
-			      <td>{service.vehicle.vin}</td>
-			      <td>{service.complaint}</td>
-			      <td>{service.status}</td>
-			      <td>{service.expected_delivery_date_}</td>
-			    </tr>
-			  })}
-			    
+			  <tbody>		  
+			    <Service services={state.services} dispath={dispatch} />
 			  </tbody>
 			</Table>
 		</div>

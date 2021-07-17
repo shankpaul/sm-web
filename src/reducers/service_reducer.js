@@ -1,12 +1,16 @@
 import axios from 'axios'
 
-export const initialState = () => {
-let data=	axios.get('/services').then(function(resp){
- 		return resp.data
- 	});
-	console.log(data)
-}
-
-export default function ServiceReducer(){
-	
+export default function ServiceReducer(state, action){
+	switch(action.type){
+		case 'index': 
+			return {
+				 services: action.payload
+			};
+		case 'delete': 
+			return {
+				 services: []
+			};
+		default:
+			return state;
+	}
 }
