@@ -4,11 +4,11 @@ export default function ServiceReducer(state, action){
 	switch(action.type){
 		case 'index': 
 			return {
-				 services: action.payload
+				 ...state, services: action.payload
 			};
 		case 'delete': 
 			return {
-				 services: []
+				 ...state, services: state.services.filter(service => service.id !== action.payload.id),
 			};
 		default:
 			return state;

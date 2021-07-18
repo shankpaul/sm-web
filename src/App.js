@@ -1,7 +1,6 @@
 import './App.css';
-import LoginPage from './pages/loginpage'
-import Dashboard from './pages/dashboard'
-import PrivateRoute from './components/privateroute'
+import {Login, Dashboard} from './pages'
+import {PrivateRoute} from './components'
 import {AuthProvider, useAuth} from './auth/auth_provider'
 import {
   BrowserRouter as Router,
@@ -19,7 +18,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login">
-            <LoginPage />
+            <Login />
           </Route>
           <PrivateRoute path="/dashboard">
             <Dashboard />

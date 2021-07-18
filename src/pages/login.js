@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '../components/login'
+import {LoginBox} from '../components'
 import {useAuth} from '../auth/auth_provider'
 import{ useHistory, useLocation} from "react-router-dom";
 
@@ -18,7 +18,7 @@ function LoginPage() {
 	return(
 		<div className="h-100 d-flex justify-content-center align-items-center">
 		  <div>
-		    <Login />
+		    <LoginBox />
 		  </div>
 		</div>
 	);

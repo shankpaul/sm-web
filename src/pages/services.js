@@ -2,8 +2,9 @@ import React,{useReducer, useEffect} from 'react';
 import {Table, Button} from 'react-bootstrap';
 import ServiceReducer from '../reducers/service_reducer'
 import axios from 'axios';
-import Service from '../components/service'
-import { Link } from "react-router-dom";
+import {ListServices, CreateService} from '../components'
+import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+
 
 const initialState = {
 	services: []
@@ -17,24 +18,20 @@ export default function Services() {
 		});
 	}, [])
 
+	let { path, url } = useRouteMatch();
+
 	return(
 		<div>
-			<Link to="/service/add" className='btn btn-primary'>Add Service</Link>
-			<Table striped bordered hover size="sm">
-			  <thead>
-			    <tr>
-			      <th>Date</th>
-			      <th>Vehicle No</th>
-			      <th>Complaint</th>
-			      <th>Status</th>
-			      <th>Delivery Date</th>
-			      <th>Actions</th>
-			    </tr>
-			  </thead>
-			  <tbody>		  
-			    <Service services={state.services} dispath={dispatch} />
-			  </tbody>
-			</Table>
+		 <Switch>
+        <Route exact path={path}>
+        	<Link to={`${url}/add`} className='btn btn-primary'>Add Service</Link>
+           <ListServices services={state.services} dispatch={dispatch} />
+        </Route>
+        <Route path={`${path}/:add`}>
+          <CreateService dispatch={dispatch} />
+        </Route>
+      </Switch>
+		
 		</div>
 	);
 }

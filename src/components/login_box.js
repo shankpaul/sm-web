@@ -4,7 +4,7 @@ import {useAuth} from '../auth/auth_provider'
 import{ useHistory, useLocation} from "react-router-dom";
 import axios from 'axios';
 
-function Login(){
+export default function LoginBox(){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let auth = useAuth();
@@ -33,5 +33,3 @@ function Login(){
       </Form>
 			)
 }
-
-export default Login;

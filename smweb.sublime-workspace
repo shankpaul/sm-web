@@ -1,0 +1,401 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"useA",
+				"useAuth"
+			],
+			[
+				"Rou",
+				"Route"
+			],
+			[
+				"auth",
+				"AuthProvider"
+			],
+			[
+				"use",
+				"useAuth"
+			],
+			[
+				"au",
+				"authContext"
+			],
+			[
+				"Auth",
+				"authContext"
+			],
+			[
+				"R",
+				"Router"
+			],
+			[
+				"item",
+				"item_rate"
+			],
+			[
+				"invoice",
+				"invoice_items"
+			],
+			[
+				"invoi",
+				"invoice_payments"
+			],
+			[
+				"serv",
+				"service_params"
+			],
+			[
+				"ass",
+				"assign_owner"
+			],
+			[
+				"vehi",
+				"vehicle_params"
+			],
+			[
+				"con",
+				"confirmed"
+			],
+			[
+				"roles",
+				"role_sym"
+			],
+			[
+				"com",
+				"company"
+			],
+			[
+				"compa",
+				"company_params"
+			],
+			[
+				"in",
+				"invalid_api_key_response"
+			],
+			[
+				"api",
+				"api_key"
+			],
+			[
+				"pass",
+				"pass_type"
+			],
+			[
+				"sub",
+				"subdomain"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/shanpaul06/works/sm-web"
+	],
+	"file_history":
+	[
+		"/home/shanpaul06/works/sm-web/src/reducers/service_reducer.js",
+		"/home/shanpaul06/works/sm-web/src/pages/services.js",
+		"/home/shanpaul06/works/sm-web/src/components/login.js",
+		"/home/shanpaul06/works/sm-web/src/App.js",
+		"/home/shanpaul06/works/sm-web/src/pages/dashboard.js",
+		"/home/shanpaul06/works/sm-web/src/pages/loginpage.js",
+		"/home/shanpaul06/works/sm-web/src/auth/auth_provider.js",
+		"/home/shanpaul06/works/sm-web/src/components/topbar.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/auth/auth_provider.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/pages/dashboard.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/auth/AuthProvider.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/components/login.js",
+		"/home/shanpaul06/works/service_management/sm-web/.env.development",
+		"/home/shanpaul06/works/service_management/sm-web/src/.env.development",
+		"/home/shanpaul06/works/service_management/sm-web/src/pages/loginpage.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/components/home.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/App.css",
+		"/home/shanpaul06/works/service_management/sm-web/src/index.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/pages/loginpage.jsx",
+		"/home/shanpaul06/works/service_management/sm-web/src/App.jsx",
+		"/home/shanpaul06/works/service_management/sm-web/package.json",
+		"/home/shanpaul06/works/pocketstudionow/config/environments/development.rb",
+		"/home/shanpaul06/works/pocketstudionow/app/assets/stylesheets/marketing.css",
+		"/home/shanpaul06/works/pocketstudionow/app/assets/javascripts/marketing.js",
+		"/home/shanpaul06/works/pocketstudionow/app/assets/stylesheets/marketing/common.css",
+		"/home/shanpaul06/works/pocketstudionow/app/views/layouts/application.html.erb",
+		"/home/shanpaul06/works/pocketstudionow/app/views/layouts/home.html.erb",
+		"/home/shanpaul06/works/pocketstudionow/app/views/shared/marketing/_scroll_to_nav.html.erb",
+		"/home/shanpaul06/works/pocketstudionow/app/views/shared/marketing/_header.html.erb",
+		"/home/shanpaul06/works/pocketstudionow/app/views/shared/marketing/_footer.html.erb",
+		"/home/shanpaul06/Downloads/Pocket-studio-latest/Pocket-studio/index.html",
+		"/home/shanpaul06/works/pocketstudionow/app/views/marketing_pages/index.html.erb",
+		"/home/shanpaul06/works/service_management/sm-web/src/App.js",
+		"/home/shanpaul06/works/service_management/sm-web/src/index.css",
+		"/home/shanpaul06/works/service_management/sm-web/src/components/hello.js",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/invoice_payments_controller.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/invoices_controller.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/concerns/crud_actions.rb",
+		"/home/shanpaul06/works/service_management/app/models/invoice.rb",
+		"/home/shanpaul06/works/service_management/app/models/service.rb",
+		"/home/shanpaul06/works/service_management/app/models/invoice_item.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/invoice_items_controller.rb",
+		"/home/shanpaul06/works/service_management/app/models/invoice_payment.rb",
+		"/home/shanpaul06/works/service_management/app/models/vehicle.rb",
+		"/home/shanpaul06/works/service_management/app/models/user.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/owners_controller.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/services_controller.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/vehicles_controller.rb",
+		"/home/shanpaul06/works/service_management/config/routes.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/users_controller.rb",
+		"/home/shanpaul06/works/service_management/app/models/owner.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210620125417_create_owners.rb",
+		"/home/shanpaul06/works/service_management/app/models/company.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/companies_controller.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210620130359_create_vehicles.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210627073113_create_invoice_payments.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210627071755_invoice_payment.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210627073152_create_invoice_items.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210627063432_create_services.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210627073045_create_invoices.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210627071320_invoice.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210627072830_invoice_items.rb",
+		"/home/shanpaul06/startvnc.sh",
+		"/home/shanpaul06/works/service_management/app/models/ability.rb",
+		"/home/shanpaul06/works/service_management/app/models/role.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210620122107_add_deleted_at_to_paranoiac.rb",
+		"/home/shanpaul06/works/service_management/app/controllers/api/v1/roles_controller.rb",
+		"/home/shanpaul06/works/service_management/Gemfile",
+		"/home/shanpaul06/Documents/Dev.postman_environment.json",
+		"/home/shanpaul06/works/service_management/app/controllers/application_controller.rb",
+		"/home/shanpaul06/works/service_management/db/seeds.rb",
+		"/home/shanpaul06/works/service_management/config/initializers/devise_token_auth.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210619130916_devise_token_auth_create_users.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210612120127_create_users.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210612120540_rolify_create_roles.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210612122611_add_domain_to_company.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210612120144_add_devise_to_users.rb",
+		"/home/shanpaul06/works/service_management/db/schema.rb",
+		"/home/shanpaul06/works/service_management/spec/controllers/api/v1/company_controller_spec.rb",
+		"/home/shanpaul06/works/service_management/.ruby-version",
+		"/home/shanpaul06/works/service_management/db/migrate/20210612115145_create_companies.rb",
+		"/home/shanpaul06/works/service_management/config/environments/development.rb",
+		"/home/shanpaul06/works/service_management/db/migrate/20210612120317_rolify_create_roles.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/initializers/models/subscription.rb",
+		"/home/shanpaul06/works/pocketstudionow/db/seeds.rb",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/app/views/subscription_notifier/welcome.text.erb",
+		"/home/shanpaul06/works/pocketstudionow/app/models/pass_type.rb",
+		"/home/shanpaul06/works/pocketstudionow/spec/factories/pass_types.rb",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/lib/saas/saas.rb",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/lib/saas/extensions/active_merchant/billing/gateways/authorize_net_cim.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/saas.yml",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/lib/saas/extensions/active_merchant/billing/gateways/stripe.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/routes.rb",
+		"/home/shanpaul06/works/pocketstudionow/app/models/payment_profile.rb",
+		"/home/shanpaul06/works/pocketstudionow/app/mailers/mail_preview.rb",
+		"/home/shanpaul06/works/pocketstudionow/spec/factories/subscriptions.rb",
+		"/home/shanpaul06/works/pocketstudionow/db/schema.rb",
+		"/home/shanpaul06/works/pocketstudionow/README.md",
+		"/home/shanpaul06/works/pocketstudionow/spec/factories/payment_profiles.rb",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/README",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/lib/saas/extensions/active_merchant.rb",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/app/models/subscription_plan.rb",
+		"/home/shanpaul06/works/pocketstudionow/Gemfile",
+		"/home/shanpaul06/works/pocketstudionow/spec/factories/users.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/application.rb",
+		"/home/shanpaul06/works/pocketstudionow/.ruby-version",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/app/models/subscription.rb",
+		"/home/shanpaul06/works/pocketstudionow/app/models/subdomain.rb",
+		"/home/shanpaul06/works/pocketstudionow/spec/factories/subdomains.rb",
+		"/home/shanpaul06/works/pocketstudionow/spec/factories/passes.rb",
+		"/home/shanpaul06/works/pocketstudionow/spec/factories/events.rb",
+		"/home/shanpaul06/works/pocketstudionow/vendor/saas-kit-gem-2.1.4/app/controllers/saas_admin/subscriptions_controller.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/recurly.yml",
+		"/home/shanpaul06/works/pocketstudionow/config/initializers/recurly_urls.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/recurly_urls.yml",
+		"/home/shanpaul06/works/pocketstudionow/app/mailers/subscription_notifier.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/initializers/recurly.rb",
+		"/home/shanpaul06/works/pocketstudionow/config/database.yml",
+		"/home/shanpaul06/works/pocketstudionow/Gemfile.lock"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 132.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "smweb.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"application",
+				"config/application.rb"
+			],
+			[
+				"subsc",
+				"app/mailers/subscription_notifier.rb"
+			],
+			[
+				"attend",
+				"spec/models/attendance_spec.rb"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 239.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
