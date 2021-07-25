@@ -8,10 +8,13 @@ import {
   Link
 } from "react-router-dom";
 
+import {NotificationContainer} from 'react-notifications';
+
 export default function Dashboard(){
 	return(
 		<div>
 			<Router>
+      	<NotificationContainer/>
 				<Topbar />
 				<Sidebar />
 				<MainArea>				

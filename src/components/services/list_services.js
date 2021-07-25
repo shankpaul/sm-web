@@ -18,7 +18,7 @@ export default function ListServices(props){
 		{props.services.map(service => 
 			<tr key={service.id}>
 				<td>{service.check_in_at}</td>
-				<td>{service.vehicle.vin}</td>
+				<td>{service.vehicle.reg_number}</td>
 				<td>{service.complaint}</td>
 				<td>{service.status}</td>
 				<td>{service.expected_delivery_date_}</td>

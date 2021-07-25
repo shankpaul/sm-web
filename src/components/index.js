@@ -5,3 +5,4 @@ export { default as Sidebar } from "./sidebar";
 export { default as Topbar } from "./topbar";
 export { default as ListServices } from "./services/list_services";
 export { default as CreateService } from "./services/create_service";
+export { default as VehicleSearch } from "./vehicle_search";
