@@ -10,7 +10,9 @@ export default function Sidebar(){
 	return(		
 		<div className="sidenav">
 				<Link to="/main">Main</Link>
-				<Link to="/services">Home</Link>
+				<Link to="/services">Sevices</Link>
+				<Link to="/owners">Owners</Link>
+				<Link to="/vehicles">Vehicles</Link>
 		</div>
 	);
 }

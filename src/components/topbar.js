@@ -19,7 +19,7 @@ export default function Topbar(){
 		        <NavDropdown.Item><AuthButton/></NavDropdown.Item>
 		      </NavDropdown>
 
-		       <Navbar.Text> {auth.user.name} </Navbar.Text>
+		       <Navbar.Text>{auth.user.name}</Navbar.Text>
 
 		    </Nav>
 		  </Navbar.Collapse>

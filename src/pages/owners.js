@@ -1,21 +1,21 @@
 import React,{useReducer, useEffect, useState} from 'react';
 import {Table, Button} from 'react-bootstrap';
-import {ServiceReducer} from '../reducers'
+import {OwnerReducer} from '../reducers'
 import axios from 'axios';
-import {ListServices, CreateService} from '../components'
+import {ListOwners, CreateOwner} from '../components'
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
 
 
 const initialState = {
-	services: []
+	owners: []
 }
 
-export default function Services() {
-	const [state, dispatch ] = useReducer(ServiceReducer, initialState);
+export default function Owners() {
+	const [state, dispatch ] = useReducer(OwnerReducer, initialState);
 	const [is_loading, setIsLoading] = useState(false);
 	useEffect(()=> {
 		setIsLoading(true)
-		axios.get('services').then((resp) => {
+		axios.get('owners').then((resp) => {
 			dispatch({type: 'index', payload: resp.data});
 			setIsLoading(false)
 		});
@@ -27,11 +27,11 @@ export default function Services() {
 		<div>
 		 <Switch>
         <Route exact path={path}>
-        	<Link to={`${url}/add`} className='btn btn-primary'>Add Service</Link>
-           <ListServices services={state.services} dispatch={dispatch} loading={is_loading} />
+        	<Link to={`${url}/add`} className='btn btn-primary'>Add Owners</Link>
+           <ListOwners owners={state.owners} dispatch={dispatch} loading={is_loading} />
         </Route>
         <Route path={`${path}/:add`}>
-          <CreateService dispatch={dispatch} />
+          <CreateOwner dispatch={dispatch} />
         </Route>
       </Switch>
 		

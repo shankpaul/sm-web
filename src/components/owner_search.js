@@ -2,21 +2,22 @@ import React,{useState} from 'react';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'; 
 import axios from 'axios';
 
-export default function VehicleSearch(props){
+export default function OwnerSearch(props){
 	const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
 
   const handleDBSearch = (query) => {
     setIsLoading(true);
     if(query!=''){
-	    axios.get('vehicles/search/'+query)
+	    axios.get('owners/search/'+query)
 	      .then((resp) => {
 
 	      	const options = resp.data.map((item) => ({
-	          reg_number: item.reg_number,
-	          vehicle_id: item.id,
-	          owner_name: item.owner.name,
-	        }));        
+	          owner_name: item.name,
+	          phone: item.phone,
+	          owner_id: item.id
+	        }));   
+            console.log(options)     
 	        setOptions(options);
 	        setIsLoading(false);
 	      });
@@ -31,16 +32,16 @@ export default function VehicleSearch(props){
     <AsyncTypeahead
     	{...props}
       filterBy={filterBy}
-      id="vehicle-search"
+      id="owner-search"
       isLoading={isLoading}
-      labelKey="reg_number"
+      labelKey="owner_name"
       minLength={0}
       onSearch={handleDBSearch}
       options={options}
-      placeholder="Search Vehicles"
+      placeholder="Search Owners"
       renderMenuItemChildren={(option, props) => (
         <div>
-          <span>{option.reg_number} - {option.owner_name}</span>
+          <span>{option.owner_name} - {option.phone}</span>
         </div>
       )}
     />
