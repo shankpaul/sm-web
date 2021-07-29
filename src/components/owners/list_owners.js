@@ -2,8 +2,11 @@ import React from 'react';
 import {Button, Table} from 'react-bootstrap';
 import {NotificationManager} from 'react-notifications';
 import axios from 'axios';
+import {Link, useRouteMatch} from "react-router-dom";
 
 export default function ListOwners(props){
+	let { path, url } = useRouteMatch();
+
 	const handleDelete = (event) => {
 		let id = event.target.value;
 		axios.delete('owners/'+id).then((resp)=>{
@@ -31,8 +34,12 @@ export default function ListOwners(props){
 				<td>{owner.phone}</td>
 				<td>{owner.email}</td>
 				<td>{owner.address}</td>
-				<td><Button variant="primary" size="sm"  onClick={handleDelete} value={owner.id}>
-				Delete</Button></td>
+				<td>
+				<Button variant="primary" size="sm" onClick={handleDelete} value={owner.id}>
+				Delete</Button> 
+				<Link to={`${url}/edit/${owner.id}`}>Edit</Link>
+				</td>
+				
 			</tr>
 		)}
 	</tbody>

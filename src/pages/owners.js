@@ -30,7 +30,11 @@ export default function Owners() {
         	<Link to={`${url}/add`} className='btn btn-primary'>Add Owners</Link>
            <ListOwners owners={state.owners} dispatch={dispatch} loading={is_loading} />
         </Route>
-        <Route path={`${path}/:add`}>
+        <Route path={`${path}/add`}>
+          <CreateOwner dispatch={dispatch} />
+        </Route>
+
+        <Route path={`${path}/edit/:id`}>
           <CreateOwner dispatch={dispatch} />
         </Route>
       </Switch>
