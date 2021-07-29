@@ -62,6 +62,7 @@ export default function CreateOwner(props){
 	const handleSearch = (selectedOptions) => {
 		let option = selectedOptions[0]
     setOwner(prevState => ({...prevState, vehicle_id: option.vehicle_id}) )
+    setVehicle(prevState =>[...prevState, {reg_number: option.reg_number, id: option.vehicle_id}])
   }
 
   const handleChange = (event) => {
@@ -99,11 +100,9 @@ export default function CreateOwner(props){
 			  
 			  <Button type="submit">Save</Button>
 			</Form>
-
-			{vehicles.map(item => 
-				<MyVehicle vehicle={item} />
-			)}
-			
+		
+			<MyVehicle vehicles={vehicles} />
+		
 		</div>
 	);
 }
@@ -111,6 +110,8 @@ export default function CreateOwner(props){
 
 const MyVehicle = (props) => {
 	return(
-		<div>{props.vehicle.reg_number}</div>
+		<ul>
+			{props.vehicles.map(item => <li>{item.reg_number}</li> )}
+		</ul>
 	)
 }
