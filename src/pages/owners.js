@@ -1,10 +1,8 @@
 import React,{useReducer, useEffect, useState} from 'react';
-import {Table, Button} from 'react-bootstrap';
 import {OwnerReducer} from '../reducers'
 import axios from 'axios';
-import {ListOwners, CreateOwner} from '../components'
+import {ListOwners, CreateOwner, ViewOwner} from '../components'
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
-
 
 const initialState = {
 	owners: []
@@ -34,8 +32,12 @@ export default function Owners() {
           <CreateOwner dispatch={dispatch} />
         </Route>
 
-        <Route path={`${path}/edit/:id`}>
+        <Route path={`${path}/:id/edit`}>
           <CreateOwner dispatch={dispatch} />
+        </Route>
+
+        <Route path={`${path}/:id`}>
+          <ViewOwner dispatch={dispatch} />
         </Route>
       </Switch>
 		

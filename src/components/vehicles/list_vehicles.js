@@ -30,7 +30,7 @@ export default function ListVehicles(props){
 			<tr key={vehicle.id}>
 				<td>{vehicle.reg_number}</td>
 				<td>{vehicle.vin_number}</td>
-				<td>{vehicle.owner.name}</td>
+				<td>{vehicle.owner && vehicle.owner.name}</td>
 				<td>{vehicle.make}</td>
 				<td>{vehicle.model}</td>
 				<td>{vehicle.color}</td>

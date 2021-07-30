@@ -3,8 +3,7 @@ import {Form, Button} from 'react-bootstrap';
 import {VehicleSearch} from '../index'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
-import {useParams} from "react-router-dom";
-import {ListVehicles} from '../'
+import {useParams, useHistory, Link} from "react-router-dom";
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -13,14 +12,14 @@ const initialState = {
 	name: '', 
 	email: '',
 	phone: '',
-	address: '',
-	vehicle_id: ''
+	address: ''
 }
 
 export default function CreateOwner(props){
 	let params = useParams();
 	const [owner, setOwner] = useState(initialState)
 	const [vehicles, setVehicle] = useState([])
+	let history = useHistory();
 
 	useEffect(()=>{
 		if(params.id){
@@ -31,7 +30,6 @@ export default function CreateOwner(props){
 	const loadOwner = (id) => {
 		let obj = {}
 		axios.get('owners/'+id).then((resp)=>{
-			console.log(resp.data)
 			Object.keys(initialState).map((item) => { obj[item]=resp.data[item] })
 			setVehicle(resp.data.vehicles)
 			setOwner(obj);
@@ -44,31 +42,56 @@ export default function CreateOwner(props){
 	}
 
 	const create = () =>{
-		axios.post('owners', owner).then((resp) => {
+		let data = {...owner, vehicle_ids: vehicles.map(item => item['id']) }
+		axios.post('owners', data).then((resp) => {
 			props.dispatch({type: 'create', payload: resp.data})
 			NotificationManager.success('Owner Created', 'Success');
 			setOwner(initialState);
+			setVehicle([]);
+			history.push('/owners')
 		});		
 	}
 
 	const update = () =>{
-		axios.put('owners/'+owner.id, owner).then((resp) => {
-			props.dispatch({type: 'create', payload: resp.data})
+		let vehicle_ids = vehicles.map((item) => {
+			return { id: item['id'],
+							 delete: item['delete'] ? true : false}
+		})
+		console.log(vehicle_ids)
+		let data = {...owner, vehicle_ids: vehicle_ids }
+		axios.put('owners/'+data.id, data).then((resp) => {
+			props.dispatch({type: 'update', payload: resp.data})
 			NotificationManager.success('Owner Updated', 'Success');
 			setOwner(initialState);
+			setVehicle([]);
+			history.push('/owners')
 		});		
 	}
 
-	const handleSearch = (selectedOptions) => {
+	const handleVehicleSearch = (selectedOptions) => {
 		let option = selectedOptions[0]
-    setOwner(prevState => ({...prevState, vehicle_id: option.vehicle_id}) )
-    setVehicle(prevState =>[...prevState, {reg_number: option.reg_number, id: option.vehicle_id}])
+    setVehicle(prevState =>[...prevState, 
+    	{reg_number: option.reg_number, 
+    	 id: option.id}
+    ])
   }
 
   const handleChange = (event) => {
   	let key = event.target.name;
   	setOwner(prevState => ({...prevState, [key]: event.target.value}) )
   }
+
+  const handleRemoveVehicle = (event) => {
+  	let id = event.target.value;
+  	let index = vehicles.findIndex(item => item.id==id)
+    setVehicle(prevState => prevState.map((item, key)=>{
+    	if(key==index){
+    		item['delete']=true;
+    	}
+    	return item;
+    }))
+  }
+
 
 	return(
 		<div>
@@ -94,14 +117,15 @@ export default function CreateOwner(props){
 			  </Form.Group>
 
 			  <Form.Group className="mb-3" controlId="Form.ControlInput5">
-			    <Form.Label>Name</Form.Label>
-			    <VehicleSearch name="v_search" onChange={handleSearch} />
+			    <Form.Label>Vehicle (if any already added)</Form.Label>
+			    <VehicleSearch name="v_search" onChange={handleVehicleSearch} />
 			  </Form.Group>
 			  
 			  <Button type="submit">Save</Button>
+			  <Link to="/owners">Cancel</Link>
 			</Form>
 		
-			<MyVehicle vehicles={vehicles} />
+			<MyVehicle vehicles={vehicles} handleDelete={handleRemoveVehicle} />
 		
 		</div>
 	);
@@ -111,7 +135,11 @@ export default function CreateOwner(props){
 const MyVehicle = (props) => {
 	return(
 		<ul>
-			{props.vehicles.map(item => <li>{item.reg_number}</li> )}
+			{props.vehicles.filter(item=>item.delete!=true).map(item => 
+				<li>{item.reg_number} 
+					<Button value={item.id} onClick={props.handleDelete}>x</Button>
+				</li>				
+			)}
 		</ul>
 	)
 }

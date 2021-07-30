@@ -11,6 +11,7 @@ export { default as CreateService } from "./services/create_service";
 
 export { default as ListOwners } from "./owners/list_owners";
 export { default as CreateOwner } from "./owners/create_owner";
+export { default as ViewOwner } from "./owners/view_owner";
 
 export { default as ListVehicles} from "./vehicles/list_vehicles";
 export { default as CreateVehicle } from "./vehicles/create_vehicle";

@@ -14,8 +14,7 @@ export default function VehicleSearch(props){
 
 	      	const options = resp.data.map((item) => ({
 	          reg_number: item.reg_number,
-	          vehicle_id: item.id,
-	          owner_name: item.owner.name,
+	          id: item.id
 	        }));        
 	        setOptions(options);
 	        setIsLoading(false);
@@ -40,7 +39,7 @@ export default function VehicleSearch(props){
       placeholder="Search Vehicles"
       renderMenuItemChildren={(option, props) => (
         <div>
-          <span>{option.reg_number} - {option.owner_name}</span>
+          <span>{option.reg_number}</span>
         </div>
       )}
     />

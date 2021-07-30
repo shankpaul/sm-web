@@ -12,6 +12,14 @@ export default function OwnerReducer(state, action){
 			return {
 				 ...state, owners: state.owners.filter(owner => owner.id !== parseInt(action.payload.id)),
 			};
+		case 'update': 
+			return {
+				 ...state, owners: state.owners.map((item,index)=> {
+				 	if(item.id==action.payload.id){
+				 		return action.payload;
+				 	}
+				 return item
+				 })};
 		default:
 			return state;
 	}
