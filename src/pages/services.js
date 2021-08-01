@@ -5,7 +5,6 @@ import axios from 'axios';
 import {ListServices, CreateService} from '../components'
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
 
-
 const initialState = {
 	services: []
 }
@@ -30,7 +29,10 @@ export default function Services() {
         	<Link to={`${url}/add`} className='btn btn-primary'>Add Service</Link>
            <ListServices services={state.services} dispatch={dispatch} loading={is_loading} />
         </Route>
-        <Route path={`${path}/:add`}>
+        <Route path={`${path}/add`}>
+          <CreateService dispatch={dispatch} />
+        </Route>
+        <Route path={`${path}/:id/edit`}>
           <CreateService dispatch={dispatch} />
         </Route>
       </Switch>

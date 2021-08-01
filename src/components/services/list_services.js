@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Table} from 'react-bootstrap';
 import {NotificationManager} from 'react-notifications';
 import axios from 'axios';
+import {Link, useHistory} from "react-router-dom";
 
 export default function ListServices(props){
 	const handleDelete = (event) => {
@@ -34,7 +35,10 @@ export default function ListServices(props){
 				<td>{service.status}</td>
 				<td>{service.expected_delivery_date_}</td>
 				<td><Button variant="primary" size="sm" onClick={handleDelete} value={service.id}>
-				Delete</Button></td>
+				Delete</Button> |  
+				<Link to={`/services/${service.id}/edit`}>Edit</Link> | 
+				<Link to={`/services/${service.id}`}>Show</Link>
+				</td>
 			</tr>
 		)}
 	</tbody>
