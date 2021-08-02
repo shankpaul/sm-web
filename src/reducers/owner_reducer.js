@@ -10,7 +10,7 @@ export default function OwnerReducer(state, action){
 			};
 		case 'delete': 
 			return {
-				 ...state, owners: state.owners.filter(owner => owner.id !== parseInt(action.payload.id)),
+				 ...state, owners: state.owners.filter(item => item.id !== parseInt(action.payload.id)),
 			};
 		case 'update': 
 			return {

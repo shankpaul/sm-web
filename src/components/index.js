@@ -16,3 +16,9 @@ export { default as ViewOwner } from "./owners/view_owner";
 
 export { default as ListVehicles} from "./vehicles/list_vehicles";
 export { default as CreateVehicle } from "./vehicles/create_vehicle";
+export { default as ViewVehicle } from "./vehicles/view_vehicle";
+
+export { default as ListUsers } from "./users/list_users";
+export { default as CreateUser } from "./users/create_user";
+export { default as ViewUser } from "./users/view_user";
+

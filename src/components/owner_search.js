@@ -15,7 +15,7 @@ export default function OwnerSearch(props){
 	      	const options = resp.data.map((item) => ({
 	          owner_name: item.name,
 	          phone: item.phone,
-	          owner_id: item.id
+	          id: item.id
 	        }));   
             console.log(options)     
 	        setOptions(options);

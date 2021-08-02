@@ -2,7 +2,7 @@ import React,{useReducer, useEffect, useState} from 'react';
 import {Table, Button} from 'react-bootstrap';
 import {VehicleReducer} from '../reducers'
 import axios from 'axios';
-import {ListVehicles, CreateVehicle} from '../components'
+import {ListVehicles, CreateVehicle,ViewVehicle} from '../components'
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
 
 
@@ -30,9 +30,22 @@ export default function Vehicles() {
         	<Link to={`${url}/add`} className='btn btn-primary'>Add Vehicles</Link>
            <ListVehicles vehicles={state.vehicles} dispatch={dispatch} loading={is_loading} />
         </Route>
-        <Route path={`${path}/:add`}>
+
+          <Route exact path={`${path}/add`}>
           <CreateVehicle dispatch={dispatch} />
         </Route>
+
+         <Route exact path={`${path}/:id/edit`}>
+          <CreateVehicle dispatch={dispatch} />
+        </Route>
+
+
+      
+         <Route exact path={`${path}/:id`}>
+          <ViewVehicle dispatch={dispatch} />
+        </Route>
+
+       
       </Switch>
 		
 		</div>

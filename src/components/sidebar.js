@@ -13,6 +13,7 @@ export default function Sidebar(){
 				<Link to="/services">Sevices</Link>
 				<Link to="/owners">Owners</Link>
 				<Link to="/vehicles">Vehicles</Link>
+				<Link to="/users">Users</Link>
 		</div>
 	);
 }

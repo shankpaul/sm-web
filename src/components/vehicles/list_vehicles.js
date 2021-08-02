@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Table} from 'react-bootstrap';
 import {NotificationManager} from 'react-notifications';
 import axios from 'axios';
-
+import {Link} from "react-router-dom";
 
 export default function ListVehicles(props){
 	const handleDelete = (event) => {
@@ -36,8 +36,8 @@ export default function ListVehicles(props){
 				<td>{vehicle.color}</td>
 				<td><Button variant="primary" size="sm" onClick={handleDelete} value={vehicle.id}>
 				Delete</Button> |
-				<Link to={`/vehicles/${service.id}/edit`}>Edit</Link> | 
-				<Link to={`/vehicles/${service.id}`}>Show</Link>
+				<Link to={`/vehicles/${vehicle.id}/edit`}>Edit</Link> | 
+				<Link to={`/vehicles/${vehicle.id}`}>Show</Link>
 				</td>
 			</tr>
 		)}

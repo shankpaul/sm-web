@@ -1,6 +1,6 @@
 import React from 'react';
 import {Topbar, Sidebar,MainArea,PrivateRoute} from '../components';
-import {Services, Owners, Vehicles} from './'
+import {Services, Owners, Vehicles, Users} from './'
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,6 +27,9 @@ export default function Dashboard(){
 				    </PrivateRoute>
 				    <PrivateRoute path="/vehicles">
 				       <Vehicles />
+				    </PrivateRoute>
+				    <PrivateRoute path="/users">
+				       <Users />
 				    </PrivateRoute>
 				    <PrivateRoute path="/">
 				      Main

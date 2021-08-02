@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Table} from 'react-bootstrap';
 import {NotificationManager} from 'react-notifications';
 import axios from 'axios';
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export default function ListServices(props){
 	const handleDelete = (event) => {

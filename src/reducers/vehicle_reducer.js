@@ -10,8 +10,16 @@ export default function VehicleReducer(state, action){
 			};
 		case 'delete': 
 			return {
-				 ...state, vehicles: state.vehicles.filter(vehicle => vehicle.id !== parseInt(action.payload.id)),
+				 ...state, vehicles: state.vehicles.filter(item => item.id !== parseInt(action.payload.id)),
 			};
+		case 'update': 
+			return {
+				 ...state, vehicles: state.vehicles.map((item,index)=> {
+				 	if(item.id==action.payload.id){
+				 		return action.payload;
+				 	}
+				 return item
+				 })};
 		default:
 			return state;
 	}

@@ -10,7 +10,7 @@ export default function ServiceReducer(state, action){
 			};
 		case 'delete': 
 			return {
-				 ...state, services: state.services.filter(service => service.id !== parseInt(action.payload.id)),
+				 ...state, services: state.services.filter(item => item.id !== parseInt(action.payload.id)),
 			};
 		case 'update': 
 			return {
