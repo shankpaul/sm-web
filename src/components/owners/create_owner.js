@@ -22,6 +22,7 @@ export default function CreateOwner(props){
 	let history = useHistory();
 
 	useEffect(()=>{
+		debugger;
 		if(params.id){
 			loadOwner(params.id)
 		}

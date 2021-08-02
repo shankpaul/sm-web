@@ -9,7 +9,8 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const initialState = {
 	id:'',
-	complaint: '', 
+	complaint: '',
+	vehicle: {}, 
 	vehicle_id: ''
 }
 
@@ -19,6 +20,7 @@ export default function CreateService(props){
 	let selected_vehicle = []
 
 	const [service, setService] = useState(initialState)
+	const [service_history, setServiceHistory] = useState([])
 
 	useEffect(()=>{
 		if(params.id){
@@ -29,8 +31,9 @@ export default function CreateService(props){
 	const loadService = (id) => {
 		let obj = {}
 		axios.get('services/'+id).then((resp)=>{
-			Object.keys(initialState).map((item) => { obj[item]=resp.data[item] })
-			setService(obj)
+			Object.keys(initialState).map((item) => { obj[item]=resp.data.service[item] })
+			setService(prevState =>({...prevState, ...obj}))
+			setServiceHistory(resp.data.history)
 			selected_vehicle = [{id: obj.vehicle_id, reg_number: 'as'}]
 		});
 	}
@@ -70,6 +73,8 @@ export default function CreateService(props){
 	return(
 		<div>
 			<Form onSubmit={handleSubmit}>
+				<div>{service.vehicle && service.vehicle.reg_number}</div>
+
 			  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 			    <Form.Label>Vehicle</Form.Label>
 			    <VehicleSearch name="v_search" onChange={handleVehicleSearch} selected={selected_vehicle}/>
@@ -80,6 +85,16 @@ export default function CreateService(props){
 			  </Form.Group>
 			  <Button type="submit">Save</Button>
 			</Form>
+			<h3>Service History </h3>
+			{service_history ? <ServiceHistory history={service_history}/> : 'No History'}
 		</div>
 	);
+}
+
+const ServiceHistory = (props) => {
+	return (
+		<ul>
+		{props.history.map(item => <li><Link to={`/services/${item.id}`}>{item.created_at}</Link></li>)}
+		</ul>
+		)
 }

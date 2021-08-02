@@ -2,7 +2,7 @@ import React,{useReducer, useEffect, useState} from 'react';
 import {Table, Button} from 'react-bootstrap';
 import {ServiceReducer} from '../reducers'
 import axios from 'axios';
-import {ListServices, CreateService} from '../components'
+import {ListServices, CreateService, ViewService} from '../components'
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
 
 const initialState = {
@@ -29,11 +29,15 @@ export default function Services() {
         	<Link to={`${url}/add`} className='btn btn-primary'>Add Service</Link>
            <ListServices services={state.services} dispatch={dispatch} loading={is_loading} />
         </Route>
-        <Route path={`${path}/add`}>
+        <Route exact path="services/add">
           <CreateService dispatch={dispatch} />
         </Route>
-        <Route path={`${path}/:id/edit`}>
+        <Route exact path="/services/:id/edit">
           <CreateService dispatch={dispatch} />
+        </Route>
+
+         <Route exact path="/services/:id">
+          <ViewService dispatch={dispatch} />
         </Route>
       </Switch>
 		

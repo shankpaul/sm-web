@@ -8,6 +8,7 @@ export { default as OwnerSearch } from "./owner_search";
 
 export { default as ListServices } from "./services/list_services";
 export { default as CreateService } from "./services/create_service";
+export { default as ViewService } from "./services/view_service";
 
 export { default as ListOwners } from "./owners/list_owners";
 export { default as CreateOwner } from "./owners/create_owner";

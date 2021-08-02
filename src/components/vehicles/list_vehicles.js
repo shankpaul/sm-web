@@ -35,7 +35,10 @@ export default function ListVehicles(props){
 				<td>{vehicle.model}</td>
 				<td>{vehicle.color}</td>
 				<td><Button variant="primary" size="sm" onClick={handleDelete} value={vehicle.id}>
-				Delete</Button></td>
+				Delete</Button> |
+				<Link to={`/vehicles/${service.id}/edit`}>Edit</Link> | 
+				<Link to={`/vehicles/${service.id}`}>Show</Link>
+				</td>
 			</tr>
 		)}
 	</tbody>
