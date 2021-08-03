@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {Form, Button} from 'react-bootstrap';
-import {VehicleSearch} from '../index'
+import {VehicleSearch, UserRole} from '../index'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 import {useParams, useHistory, Link} from "react-router-dom";
@@ -11,7 +11,10 @@ const initialState = {
 	id: '',
 	name: '', 
 	email: '',
-	phone: ''
+	phone: '',
+	password: '',
+	password_confirmation: '',
+	roles:[]
 }
 
 export default function CreateUser(props){
@@ -28,9 +31,14 @@ export default function CreateUser(props){
 	const loadUser = (id) => {
 		let obj = {}
 		axios.get('users/'+id).then((resp)=>{
-			Object.keys(initialState).map((item) => { obj[item]=resp.data[item] })
-			setUser(obj);
-		});
+			Object.keys(initialState).map((key) => {
+				if(typeof(resp.data[key])!=='undefined'){
+					 obj[key]=resp.data[key];
+				}			
+			});
+			obj.roles.map(role => role.checked = true)
+			setUser(prevState => ({...prevState, ...obj}));
+		}, (er)=>{console.log(er)})
 	}
 
 	const handleSubmit = (event) => {
@@ -62,23 +70,17 @@ export default function CreateUser(props){
 		});		
 	}
 
-	  const handleChange = (event) => {
+	const handleChange = (event) => {
   	let key = event.target.name
   	setUser(prevState => ({...prevState, [key]: event.target.value}) )
   }
 
-
-   // const handleRemoveRole = (event) => {
-  // 	let id = event.target.value;
-  // 	let index = vehicles.findIndex(item => item.id==id)
-  //   setVehicle(prevState => prevState.map((item, key)=>{
-  //   	if(key==index){
-  //   		item['delete']=true;
-  //   	}
-  //   	return item;
-  //   }))
-  // }
-
+  const handleRoleChange = (roles) => {
+  	if(roles.length > 0)
+  	{
+  		setUser(prevState => ({...prevState, roles: roles}))
+  	}
+  }
 
 	return(
 		<div>
@@ -97,6 +99,18 @@ export default function CreateUser(props){
 			    <Form.Label>Phone</Form.Label>
 			    <Form.Control type="text" name="phone" value={user.phone} placeholder="Phone"  onChange={handleChange} />
 			  </Form.Group>
+
+			  <Form.Group className="mb-3" controlId="Form.ControlTextarea4">
+			    <Form.Label>Password</Form.Label>
+			    <Form.Control type="password" name="password" value={user.password} placeholder="Password"  onChange={handleChange} />
+			  </Form.Group>
+
+			  <Form.Group className="mb-3" controlId="Form.ControlTextarea4">
+			    <Form.Label>Password Confirmation</Form.Label>
+			    <Form.Control type="password" name="password_confirmation" value={user.password_confirmation} placeholder="Password Confirmation"  onChange={handleChange} />
+			  </Form.Group>
+
+			  <UserRole selected_roles={user.roles} onChange={handleRoleChange}/>
 			  
 			  <Button type="submit">Save</Button>
 			  <Link to="/users">Cancel</Link>
@@ -104,3 +118,4 @@ export default function CreateUser(props){
 		</div>
 	);
 }
+
