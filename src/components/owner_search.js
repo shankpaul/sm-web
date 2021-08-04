@@ -8,7 +8,7 @@ export default function OwnerSearch(props){
 
   const handleDBSearch = (query) => {
     setIsLoading(true);
-    if(query!=''){
+    if(query!==''){
 	    axios.get('owners/search/'+query)
 	      .then((resp) => {
 

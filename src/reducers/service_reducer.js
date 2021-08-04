@@ -15,7 +15,7 @@ export default function ServiceReducer(state, action){
 		case 'update': 
 			return {
 				 ...state, services: state.services.map((item,index)=> {
-				 	if(item.id==action.payload.id){
+				 	if(item.id===action.payload.id){
 				 		return action.payload;
 				 	}
 				 return item })

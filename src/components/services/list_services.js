@@ -26,7 +26,7 @@ export default function ListServices(props){
 			</tr>
 		</thead>
 		<tbody>
-		{ props.loading ? <tr><td colSpan="6">Loading..</td></tr> : '' }		  
+		{props.loading && <tr><td colSpan="6">Loading..</td></tr>}
 		{props.services.map(service => 
 			<tr key={service.id}>
 				<td>{service.check_in_at}</td>
@@ -41,8 +41,7 @@ export default function ListServices(props){
 				</td>
 			</tr>
 		)}
-	</tbody>
+		</tbody>
 	</Table>
 	)
-
 }

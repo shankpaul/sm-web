@@ -27,7 +27,7 @@ export default function ListUsers(props){
 			</tr>
 		</thead>
 		<tbody>
-		{ props.loading ? <tr><td colSpan="6">Loading..</td></tr> : '' }		  
+		{props.loading && <tr><td colSpan="6">Loading..</td></tr>}
 		{props.users.map(user => 
 			<tr key={user.id}>
 				<td>{user.name}</td>

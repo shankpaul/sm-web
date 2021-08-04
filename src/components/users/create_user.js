@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {Form, Button} from 'react-bootstrap';
-import {VehicleSearch, UserRole} from '../index'
+import {UserRole} from '../index'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 import {useParams, useHistory, Link} from "react-router-dom";
@@ -14,7 +14,8 @@ const initialState = {
 	phone: '',
 	password: '',
 	password_confirmation: '',
-	roles:[]
+	roles:[], 
+	errors: []
 }
 
 export default function CreateUser(props){
@@ -26,19 +27,19 @@ export default function CreateUser(props){
 		if(params.id){
 			loadUser(params.id)
 		}
-	},[])
+	},[params])
 
 	const loadUser = (id) => {
 		let obj = {}
 		axios.get('users/'+id).then((resp)=>{
-			Object.keys(initialState).map((key) => {
+			Object.keys(initialState).forEach((key) => {
 				if(typeof(resp.data[key])!=='undefined'){
 					 obj[key]=resp.data[key];
 				}			
 			});
-			obj.roles.map(role => role.checked = true)
+			obj.roles.forEach(role => role.checked = true)
 			setUser(prevState => ({...prevState, ...obj}));
-		}, (er)=>{console.log(er)})
+		})
 	}
 
 	const handleSubmit = (event) => {
@@ -53,7 +54,9 @@ export default function CreateUser(props){
 			NotificationManager.success('User Created', 'Success');
 			setUser(initialState);
 			history.push('/users')
-		});		
+		}).catch(data => {
+			setUser(prevState => ({...prevState, errors: data.response.errors}))
+		})		
 	}
 
 	const update = () =>{
@@ -100,12 +103,12 @@ export default function CreateUser(props){
 			    <Form.Control type="text" name="phone" value={user.phone} placeholder="Phone"  onChange={handleChange} />
 			  </Form.Group>
 
-			  <Form.Group className="mb-3" controlId="Form.ControlTextarea4">
+			  <Form.Group className="mb-3" controlId="Form.ControlTextarea5">
 			    <Form.Label>Password</Form.Label>
 			    <Form.Control type="password" name="password" value={user.password} placeholder="Password"  onChange={handleChange} />
 			  </Form.Group>
 
-			  <Form.Group className="mb-3" controlId="Form.ControlTextarea4">
+			  <Form.Group className="mb-3" controlId="Form.ControlTextarea6">
 			    <Form.Label>Password Confirmation</Form.Label>
 			    <Form.Control type="password" name="password_confirmation" value={user.password_confirmation} placeholder="Password Confirmation"  onChange={handleChange} />
 			  </Form.Group>

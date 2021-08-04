@@ -1,11 +1,9 @@
 import React from 'react';
 import {Topbar, Sidebar,MainArea,PrivateRoute} from '../components';
-import {Services, Owners, Vehicles, Users} from './'
+import {Services, Owners, Vehicles, Users, Invoices} from './'
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+  Switch
 } from "react-router-dom";
 
 import {NotificationContainer} from 'react-notifications';
@@ -30,6 +28,9 @@ export default function Dashboard(){
 				    </PrivateRoute>
 				    <PrivateRoute path="/users">
 				       <Users />
+				    </PrivateRoute>
+				    <PrivateRoute path="/invoices">
+				       <Invoices />
 				    </PrivateRoute>
 				    <PrivateRoute path="/">
 				      Main

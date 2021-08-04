@@ -23,3 +23,8 @@ export { default as CreateUser } from "./users/create_user";
 export { default as ViewUser } from "./users/view_user";
 export { default as UserRole } from "./users/user_role";
 
+export { default as ListInvoices} from "./invoices/list_invoices";
+export { default as CreateInvoice } from "./invoices/create_invoice";
+export { default as ViewInvoice } from "./invoices/view_invoice";
+export { default as Invoice } from "./invoices/invoice";
+

@@ -4,7 +4,7 @@ import {NotificationManager} from 'react-notifications';
 import axios from 'axios';
 import {Link, useParams, useHistory} from "react-router-dom";
 
-export default function ViewOwner(props){
+export default function ViewInvoice(props){
 	let params = useParams();
 	const [owner, setOwner] = useState({})
 	let history = useHistory();

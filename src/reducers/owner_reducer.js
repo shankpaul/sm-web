@@ -15,7 +15,7 @@ export default function OwnerReducer(state, action){
 		case 'update': 
 			return {
 				 ...state, owners: state.owners.map((item,index)=> {
-				 	if(item.id==action.payload.id){
+				 	if(item.id===action.payload.id){
 				 		return action.payload;
 				 	}
 				 return item

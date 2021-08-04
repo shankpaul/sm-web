@@ -13,10 +13,9 @@ export default function ViewService(props){
 		if(params.id){
 			loadService(params.id)
 		}
-	},[])
+	},[params])
 
 	const loadService = (id) => {
-		let obj = {}
 		axios.get('services/'+id).then((resp)=>{
 			setService(resp.data.service)
 		});

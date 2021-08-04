@@ -25,7 +25,7 @@ export default function ListVehicles(props){
 			</tr>
 		</thead>
 		<tbody>
-		{props.loading ? <tr><td colSpan="6">Loading..</td></tr> : ''}		  
+		{props.loading && <tr><td colSpan="6">Loading..</td></tr>}
 		{props.vehicles.map(vehicle => 
 			<tr key={vehicle.id}>
 				<td>{vehicle.reg_number}</td>

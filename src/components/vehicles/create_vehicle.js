@@ -3,7 +3,7 @@ import {Form, Button} from 'react-bootstrap';
 import {OwnerSearch} from '../index'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
-import {useParams, useHistory, Link} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -32,12 +32,12 @@ export default function CreateVehicle(props){
 		if(params.id){
 			loadVehicle(params.id)
 		}
-	},[])
+	},[params])
 
 	const loadVehicle = (id) => {
 		let obj = {}
 		axios.get('vehicles/'+id).then((resp)=>{
-			Object.keys(initialState).map((item) => { obj[item]=resp.data[item] })
+			Object.keys(initialState).forEach((item) => { obj[item]=resp.data[item] })
 			setVehicle(prevState =>({...prevState, ...obj}))
 		});
 	}

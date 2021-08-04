@@ -8,7 +8,7 @@ export default function VehicleSearch(props){
 
   const handleDBSearch = (query) => {
     setIsLoading(true);
-    if(query!=''){
+    if(query!==''){
 	    axios.get('vehicles/search/'+query)
 	      .then((resp) => {
 

@@ -16,7 +16,7 @@ const initialState = {
 }
 
 export default function CreateOwner(props){
-	let params = useParams();
+	const params = useParams();
 	const [owner, setOwner] = useState(initialState)
 	const [vehicles, setVehicle] = useState([])
 	let history = useHistory();
@@ -25,12 +25,12 @@ export default function CreateOwner(props){
 		if(params.id){
 			loadOwner(params.id)
 		}
-	},[])
+	},[params])
 
 	const loadOwner = (id) => {
 		let obj = {}
 		axios.get('owners/'+id).then((resp)=>{
-			Object.keys(initialState).map((item) => { obj[item]=resp.data[item] })
+			Object.keys(initialState).forEach((item) => { obj[item]=resp.data[item] })
 			setVehicle(resp.data.vehicles)
 			setOwner(obj);
 		});
@@ -83,9 +83,9 @@ export default function CreateOwner(props){
 
   const handleRemoveVehicle = (event) => {
   	let id = event.target.value;
-  	let index = vehicles.findIndex(item => item.id==id)
+  	let index = vehicles.findIndex(item => item.id===id)
     setVehicle(prevState => prevState.map((item, key)=>{
-    	if(key==index){
+    	if(key===index){
     		item['delete']=true;
     	}
     	return item;
@@ -135,8 +135,8 @@ export default function CreateOwner(props){
 const MyVehicle = (props) => {
 	return(
 		<ul>
-			{props.vehicles.filter(item=>item.delete!=true).map(item => 
-				<li>{item.reg_number} 
+			{props.vehicles.filter(item=>item.delete!==true).map(item => 
+				<li key={item.id}>{item.reg_number} 
 					<Button value={item.id} onClick={props.handleDelete}>x</Button>
 				</li>				
 			)}

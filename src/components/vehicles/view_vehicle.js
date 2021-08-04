@@ -13,7 +13,7 @@ export default function ViewVehicle(props){
 		if(params.id){
 			loadVehicle(params.id)
 		}
-	},[])
+	},[params])
 
 	const loadVehicle = (id) => {
 		axios.get('vehicles/'+id).then((resp)=>{

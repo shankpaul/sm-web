@@ -1,5 +1,4 @@
 import React,{useReducer, useEffect, useState} from 'react';
-import {Table, Button} from 'react-bootstrap';
 import {ServiceReducer} from '../reducers'
 import axios from 'axios';
 import {ListServices, CreateService, ViewService} from '../components'
@@ -29,7 +28,7 @@ export default function Services() {
         	<Link to={`${url}/add`} className='btn btn-primary'>Add Service</Link>
            <ListServices services={state.services} dispatch={dispatch} loading={is_loading} />
         </Route>
-        <Route exact path="services/add">
+        <Route exact path="/services/add">
           <CreateService dispatch={dispatch} />
         </Route>
         <Route exact path="/services/:id/edit">

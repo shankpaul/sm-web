@@ -15,7 +15,7 @@ export default function UserReducer(state, action){
 		case 'update': 
 			return {
 				 ...state, users: state.users.map((item,index)=> {
-				 	if(item.id==action.payload.id){
+				 	if(item.id===action.payload.id){
 				 		return action.payload;
 				 	}
 				 return item

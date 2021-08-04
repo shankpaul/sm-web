@@ -1,8 +1,7 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {useAuth} from '../auth/auth_provider'
-import{ useHistory, useLocation} from "react-router-dom";
-import axios from 'axios';
+import{ useHistory} from "react-router-dom";
 
 export default function LoginBox(){
   const [email, setEmail] = useState("");

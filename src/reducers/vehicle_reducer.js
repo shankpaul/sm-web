@@ -15,7 +15,7 @@ export default function VehicleReducer(state, action){
 		case 'update': 
 			return {
 				 ...state, vehicles: state.vehicles.map((item,index)=> {
-				 	if(item.id==action.payload.id){
+				 	if(item.id===action.payload.id){
 				 		return action.payload;
 				 	}
 				 return item

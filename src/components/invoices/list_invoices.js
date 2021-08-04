@@ -5,14 +5,14 @@ import axios from 'axios';
 import {Link, useHistory} from "react-router-dom";
 
 
-export default function ListOwners(props){
+export default function ListInvoices(props){
 	let history = useHistory();
 	const handleDelete = (event) => {
 		let id = event.target.value;
-		axios.delete('owners/'+id).then((resp)=>{
+		axios.delete('invoices/'+id).then((resp)=>{
 			props.dispatch({type: 'delete', payload: {id: id}})
 			NotificationManager.success('Owner Deleted', 'Success');
-			history.push('/owners')
+			history.push('/invoices')
 		});
 	}
 
@@ -20,26 +20,28 @@ export default function ListOwners(props){
 		<Table striped bordered hover size="sm">
 			<thead>
 			<tr>
-				<th>Name</th>
-				<th>Phone</th>
-				<th>Address</th>
-				<th>Email</th>
+				<th>Invoice Code</th>
+				<th>Date</th>
+				<th>Amount</th>
+				<th>Paid</th>
+				<th>Status</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 		{props.loading && <tr><td colSpan="6">Loading..</td></tr>}
-		{props.owners.map(owner => 
-			<tr key={owner.id}>
-				<td>{owner.name}</td>
-				<td>{owner.phone}</td>
-				<td>{owner.address}</td>
-				<td>{owner.email}</td>
+		{props.invoices.map(invoice => 
+			<tr key={invoice.id}>
+				<td>{invoice.code}</td>
+				<td>{invoice.created_at}</td>
+				<td>{invoice.net_amount}</td>
+				<td>{invoice.paid_amount}</td>
+					<td>{invoice.status}</td>
 				<td>
-				<Button variant="primary" size="sm" onClick={handleDelete} value={owner.id}>
+				<Button variant="primary" size="sm" onClick={handleDelete} value={invoice.id}>
 				Delete</Button> |  
-				<Link to={`/owners/${owner.id}/edit`}>Edit</Link> | 
-				<Link to={`/owners/${owner.id}`}>Show</Link>
+				<Link to={`/invoices/${invoice.id}/edit`}>Edit</Link> | 
+				<Link to={`/invoices/${invoice.id}`}>Show</Link>
 				</td>
 				
 			</tr>

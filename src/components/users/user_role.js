@@ -9,9 +9,6 @@ const initialState = [
 export default function UserRole(props) {
 
 	const [roles, setRoles] = useState(initialState);
-
-	console.log(roles)
-
 	useEffect(()=>{
 		let filtered_roles = props.selected_roles.filter(item=>item.checked).map(item=> item.name)
 		setRoles(prevState => prevState.map((item, key)=>{
@@ -23,9 +20,9 @@ export default function UserRole(props) {
 	const handleChange = (event) => {
 		let name = event.target.name;
 		let checked = event.target.checked;
-  	let index = roles.findIndex(item => item.name==name);
+  	let index = roles.findIndex(item => item.name===name);
 		setRoles(prevState => prevState.map((item, key)=>{
-    	if(key==index){
+    	if(key===index){
     		 item.checked = checked
     	}
     	return item;

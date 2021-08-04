@@ -1,15 +1,11 @@
 import './App.css';
 import {Login, Dashboard} from './pages'
 import {PrivateRoute} from './components'
-import {AuthProvider, useAuth} from './auth/auth_provider'
+import {AuthProvider} from './auth/auth_provider'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation
+  Route
 } from "react-router-dom";
 
 function App() {

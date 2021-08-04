@@ -3,7 +3,7 @@ import {Form, Button} from 'react-bootstrap';
 import {VehicleSearch} from '../index'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
-import {useParams, useHistory, Link} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -16,7 +16,7 @@ const initialState = {
 
 export default function CreateService(props){
 	let params = useParams();
-	let history = useHistory();
+	// let history = useHistory();
 	
 	let selected_vehicle = []
 
@@ -27,12 +27,12 @@ export default function CreateService(props){
 		if(params.id){
 			loadService(params.id)
 		}
-	},[])
+	},[params])
 
 	const loadService = (id) => {
 		let obj = {}
 		axios.get('services/'+id).then((resp)=>{
-			Object.keys(initialState).map((item) => { obj[item]=resp.data.service[item] })
+			Object.keys(initialState).forEach((item) => { obj[item]=resp.data.service[item] })
 			setService(prevState =>({...prevState, ...obj}))
 			setServiceHistory(resp.data.history)
 			selected_vehicle = [{id: obj.vehicle_id, reg_number: 'as'}]

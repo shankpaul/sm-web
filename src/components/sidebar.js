@@ -1,8 +1,5 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
 
@@ -14,6 +11,7 @@ export default function Sidebar(){
 				<Link to="/owners">Owners</Link>
 				<Link to="/vehicles">Vehicles</Link>
 				<Link to="/users">Users</Link>
+				<Link to="/invoices">Invoices</Link>
 		</div>
 	);
 }

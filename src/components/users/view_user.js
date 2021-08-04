@@ -13,10 +13,9 @@ export default function ViewUser(props){
 		if(params.id){
 			loadUser(params.id)
 		}
-	},[])
+	},[params])
 
 	const loadUser = (id) => {
-		let obj = {}
 		axios.get('users/'+id).then((resp)=>{
 			setUser(resp.data)
 		});

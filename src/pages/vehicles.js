@@ -1,5 +1,4 @@
 import React,{useReducer, useEffect, useState} from 'react';
-import {Table, Button} from 'react-bootstrap';
 import {VehicleReducer} from '../reducers'
 import axios from 'axios';
 import {ListVehicles, CreateVehicle,ViewVehicle} from '../components'
