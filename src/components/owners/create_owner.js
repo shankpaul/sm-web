@@ -25,7 +25,7 @@ export default function CreateOwner(props){
 		if(params.id){
 			loadOwner(params.id)
 		}
-	},[params])
+	},[params.id])
 
 	const loadOwner = (id) => {
 		let obj = {}
@@ -57,7 +57,6 @@ export default function CreateOwner(props){
 			return { id: item['id'],
 							 delete: item['delete'] ? true : false}
 		})
-		console.log(vehicle_ids)
 		let data = {...owner, vehicle_ids: vehicle_ids }
 		axios.put('owners/'+data.id, data).then((resp) => {
 			props.dispatch({type: 'update', payload: resp.data})

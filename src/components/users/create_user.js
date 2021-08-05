@@ -27,7 +27,7 @@ export default function CreateUser(props){
 		if(params.id){
 			loadUser(params.id)
 		}
-	},[params])
+	},[params.id])
 
 	const loadUser = (id) => {
 		let obj = {}

@@ -32,7 +32,7 @@ export default function CreateVehicle(props){
 		if(params.id){
 			loadVehicle(params.id)
 		}
-	},[params])
+	},[params.id])
 
 	const loadVehicle = (id) => {
 		let obj = {}

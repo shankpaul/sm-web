@@ -15,30 +15,32 @@ const initialState = {
 export default function CreateInvoice(props){
   const params = useParams();
   const [state, setState] = useState(initialState)
-  const [customer, setCustomer] = useState({})
 
   useEffect(()=>{
+    console.log('reached compnent fetch')
     if(params.id){
       loadInvoice(params.id)
     }
-  },[params])
+  },[params.id])
 
   const loadInvoice = (id) => {
     let obj = {}
     axios.get('invoices/'+id).then((resp)=>{
       setState(prevState => ({...prevState, ...resp.data}));
-      const customer_data = {
-        name: state.invoice.customer_name,
-        phone: state.invoice.customer_phone,
-        address: state.invoice.customer_address,
-        email: state.invoice.customer_email,
-      }
-      setCustomer(prevState => ({...prevState,...customer_data}));
     });
+  }
+
+  const handleSave = () =>{
+
+  }
+
+  const handlePayment = () =>{
+    
   }
 
 	return(<Invoice invoice={state.invoice} 
                   service={state.service} 
-                  customer={customer} />);
+                  onSave={handleSave} 
+                  onPayment={handlePayment} />);
 }
 

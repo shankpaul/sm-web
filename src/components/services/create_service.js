@@ -27,7 +27,7 @@ export default function CreateService(props){
 		if(params.id){
 			loadService(params.id)
 		}
-	},[params])
+	},[params.id])
 
 	const loadService = (id) => {
 		let obj = {}

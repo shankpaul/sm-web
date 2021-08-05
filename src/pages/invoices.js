@@ -13,6 +13,7 @@ export default function Invoices() {
 	const [is_loading, setIsLoading] = useState(false);
 	useEffect(()=> {
 		setIsLoading(true)
+		console.log('reached page')
 		axios.get('invoices').then((resp) => {
 			dispatch({type: 'index', payload: resp.data});
 			setIsLoading(false)
