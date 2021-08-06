@@ -13,12 +13,14 @@ export default function Invoices() {
 	const [is_loading, setIsLoading] = useState(false);
 	useEffect(()=> {
 		setIsLoading(true)
-		console.log('reached page')
+	
 		axios.get('invoices').then((resp) => {
 			dispatch({type: 'index', payload: resp.data});
 			setIsLoading(false)
 		});
 	}, [])
+
+		console.log('reached page')
 
 	let { path, url } = useRouteMatch();
 
@@ -29,15 +31,15 @@ export default function Invoices() {
         	<Link to={`${url}/add`} className='btn btn-primary'>Add Invoice</Link>
            <ListInvoices invoices={state.invoices} dispatch={dispatch} loading={is_loading} />
         </Route>
-        <Route path={`${path}/add`}>
+        <Route exact path={`${path}/add`}>
           <CreateInvoice dispatch={dispatch} />
         </Route>
 
-        <Route path={`${path}/:id/edit`}>
+        <Route exact path={`${path}/:id/edit`}>
           <CreateInvoice dispatch={dispatch} />
         </Route>
 
-        <Route path={`${path}/:id`}>
+        <Route exact path={`${path}/:id`}>
           <ViewInvoice dispatch={dispatch} />
         </Route>
       </Switch>

@@ -38,9 +38,15 @@ export default function CreateInvoice(props){
     
   }
 
-	return(<Invoice invoice={state.invoice} 
+  console.log("crate")
+
+	return(
+    <>
+    {state.invoice.id && <Invoice invoice={state.invoice} 
                   service={state.service} 
                   onSave={handleSave} 
-                  onPayment={handlePayment} />);
+                  onPayment={handlePayment} />}
+    </>
+    );
 }
 
