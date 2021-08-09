@@ -8,7 +8,7 @@ export default function Topbar(){
 	let auth = useAuth();
 	return(
 		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-		  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+		  <Navbar.Brand href="#home">SM Web</Navbar.Brand>
 		  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 		  <Navbar.Collapse className="justify-content-end">
 		    <Nav>

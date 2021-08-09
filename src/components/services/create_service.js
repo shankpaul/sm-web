@@ -18,10 +18,9 @@ export default function CreateService(props){
 	let params = useParams();
 	// let history = useHistory();
 	
-	let selected_vehicle = []
-
 	const [service, setService] = useState(initialState)
 	const [service_history, setServiceHistory] = useState([])
+	const [selected_vehicle, setSelectedVehicle] = useState([])
 
 	useEffect(()=>{
 		if(params.id){
@@ -35,7 +34,7 @@ export default function CreateService(props){
 			Object.keys(initialState).forEach((item) => { obj[item]=resp.data.service[item] })
 			setService(prevState =>({...prevState, ...obj}))
 			setServiceHistory(resp.data.history)
-			selected_vehicle = [{id: obj.vehicle_id, reg_number: 'as'}]
+			setSelectedVehicle([{id: obj.vehicle_id, reg_number: 'as'}])
 		});
 	}
 
@@ -63,6 +62,7 @@ export default function CreateService(props){
 
 	const handleVehicleSearch = (selectedOptions) => {
 		let option = selectedOptions[0]
+		setSelectedVehicle([option]);
     setService(prevState =>({...prevState, vehicle_id: option.id}))
   }
 

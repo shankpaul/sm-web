@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {Form,ButtonGroup, Button, Container, Row, Col, Table, Modal} from 'react-bootstrap';
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './invoice.css'
@@ -47,6 +47,16 @@ function InvoiceInfo(props){
 			<div>Invoice ID: #{props.invoice_code}</div>
 			<div>Invoice Date: {props.date}</div>
 			<div>Invoice State: {props.status}</div>
+		</Col>
+  )
+}
+
+function ServiceInfo(props){
+	return(
+		<Col>
+			<h4>Service</h4>
+			<div>Service Code: <Link to={`/services/${props.id}`}>#{props.invoice_code}</Link></div>
+			<div>Service Date: {props.date}</div>
 		</Col>
   )
 }
@@ -168,25 +178,25 @@ function InvoicePaymentForm(props){
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title >Payment Mode</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form.Group controlId="Mode">
-		      <Form.Label>Payment Mode</Form.Label>
-		      <Form.Control as="select" name="payment_mode" onChange={handlePaymentEdit} 
-		      							defaultValue={payment.payment_mode}>
-		        <option>Cash</option>
-		        <option>Card</option>
-		      </Form.Control>
-		    </Form.Group>
-		  
-		  { payment.payment_mode == 'Card' &&
-		    <Form.Group controlId="ModeNumber">
-		      <Form.Label>Number (last 4 digit)</Form.Label>
-		      <Form.Control onChange={handlePaymentEdit} name="card_number"
-		      							value={payment.card_number} />
-		    </Form.Group>
-		  }
+	      <Modal.Title >Payment Mode</Modal.Title>
+	    </Modal.Header>
+	      <Modal.Body>
+	        <Form.Group controlId="Mode">
+			      <Form.Label>Payment Mode</Form.Label>
+			      <Form.Control as="select" name="payment_mode" onChange={handlePaymentEdit} 
+			      							defaultValue={payment.payment_mode}>
+			        <option>Cash</option>
+			        <option>Card</option>
+			      </Form.Control>
+			    </Form.Group>
+			  
+			  { payment.payment_mode == 'Card' &&
+			    <Form.Group controlId="ModeNumber">
+			      <Form.Label>Number (last 4 digit)</Form.Label>
+			      <Form.Control onChange={handlePaymentEdit} name="card_number"
+			      							value={payment.card_number} />
+			    </Form.Group>
+			  }
 
 		    <Form.Group controlId="Amount">
 		      <Form.Label>Amount</Form.Label>
@@ -280,12 +290,14 @@ export default function Invoice(props){
 	<Container>
 		<ExportActions />	
 		<Row>
-			<CustomerInfo name={props.invoice.customer_name} 
+			<CustomerInfo name={props.invoice.customer_name}
 								   	email={props.invoice.customer_email} 
 									  address={props.invoice.customer_address} />
 			<InvoiceInfo invoice_code={props.invoice.code} 
-									 data={props.invoice.created_at}
-									 status={props.status} />		          
+									 date={props.invoice.created_at}
+									 status={props.status} />
+			<ServiceInfo service_code={props.service.code} id={props.service.id}
+									 date={props.service.created_at} />	        
 		</Row>	
 		<hr />
 		<Row>
