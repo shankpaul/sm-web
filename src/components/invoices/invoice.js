@@ -17,13 +17,13 @@ function InvoiceTotal(props){
 		</tr> 
 		<tr>
 			<td colSpan="3"></td>
-			<td align="right">Paid</td>
-			<td>-{props.paid || 0}</td>
+			<td align="right">Paid (-)</td>
+			<td>{props.paid || 0}</td>
 		</tr> 
 		<tr>
 			<td colSpan="3"></td>
 			<td align="right"><h3>Total</h3></td>
-			<td><h3>{balance || 0}</h3></td>
+			<td><h3>Rs {balance || 0}</h3></td>
 		</tr>  
 		</>
 	)
@@ -71,6 +71,52 @@ function ExportActions(props){
 			</ButtonGroup>
 		</Row>
   )
+}
+
+function PaymentHistory(props){
+	const [modalShow, setModalShow] = useState(false);
+	const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
+
+	const total_paid =	props
+											.history.map(item => item.amount)
+											.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
+
+	return(
+		<>
+		<Button size="sm" onClick={handleShow}>Payment History</Button>
+
+		<Modal
+		  show={modalShow}
+      size="sm"
+      centered
+      onHide={handleClose}
+    >
+      <Modal.Header closeButton >
+	      <Modal.Title >Payment Mode</Modal.Title>
+	    </Modal.Header>
+	      <Modal.Body>	        
+	        <table border="1px">
+						{props.history.map(item=>
+							<tr>
+							  <td>{item.amount}</td>
+							  <td>{item.payment_mode}</td>
+							  <td>{item.created_at}</td>
+							</tr>
+						)}
+						<tr>
+							  <td>Total: <b>{total_paid}</b></td>
+							  <td></td>
+							  <td></td>
+							</tr>
+					</table>	
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={handleClose}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+    </>			
+	)
 }
 
 function InvoiceItem(props){
@@ -165,9 +211,45 @@ function InvoicePaymentForm(props){
 		amount: props.amount
 	});
 
+	useEffect(()=>{
+		setPayment(prevState=>({...prevState, amount: props.amount}))
+	}, [props.amount])
+
 	const handlePaymentEdit = (event) => {
 		const key = event.target.name;
 		setPayment(prevState => ({...prevState, [key]: event.target.value}))
+	}
+
+	const renderForm = () =>{
+   if(payment.amount > 0)
+   {
+      return(
+      	<>
+	      	<Form.Group controlId="Mode">
+				      <Form.Label>Payment Mode</Form.Label>
+				      <Form.Control as="select" name="payment_mode" onChange={handlePaymentEdit} 
+				      							defaultValue={payment.payment_mode}>
+				        <option>Cash</option>
+				        <option>Card</option>
+				      </Form.Control>
+				    </Form.Group>
+				  
+				  {	payment.payment_mode == 'Card' &&
+				    <Form.Group controlId="ModeNumber">
+				      <Form.Label>Number (last 4 digit)</Form.Label>
+				      <Form.Control onChange={handlePaymentEdit} name="card_number"
+				      							value={payment.card_number} />
+				    </Form.Group>
+				  }
+
+			    <Form.Group controlId="Amount">
+			      <Form.Label>Amount</Form.Label>
+			      <Form.Control value={payment.amount} name="amount" onChange={handlePaymentEdit}/>
+			    </Form.Group>
+		   	</>
+		   );
+   }
+   return <div>No Pay</div>;
 	}
 	return(
 		 <Modal
@@ -181,32 +263,10 @@ function InvoicePaymentForm(props){
 	      <Modal.Title >Payment Mode</Modal.Title>
 	    </Modal.Header>
 	      <Modal.Body>
-	        <Form.Group controlId="Mode">
-			      <Form.Label>Payment Mode</Form.Label>
-			      <Form.Control as="select" name="payment_mode" onChange={handlePaymentEdit} 
-			      							defaultValue={payment.payment_mode}>
-			        <option>Cash</option>
-			        <option>Card</option>
-			      </Form.Control>
-			    </Form.Group>
-			  
-			  { payment.payment_mode == 'Card' &&
-			    <Form.Group controlId="ModeNumber">
-			      <Form.Label>Number (last 4 digit)</Form.Label>
-			      <Form.Control onChange={handlePaymentEdit} name="card_number"
-			      							value={payment.card_number} />
-			    </Form.Group>
-			  }
-
-		    <Form.Group controlId="Amount">
-		      <Form.Label>Amount</Form.Label>
-		      <Form.Control value={payment.amount} name="amount" onChange={handlePaymentEdit}/>
-		    </Form.Group>
-
-
+	        {renderForm()}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => props.addPayment(payment, props.onHide)}>Pay</Button>
+        <Button disabled={props.amount===0} onClick={() => props.addPayment(payment, props.onHide)}>Pay</Button>
       </Modal.Footer>
     </Modal>
 	)
@@ -214,6 +274,7 @@ function InvoicePaymentForm(props){
 
 function InvoiceActions(props){
 	const [modalShow, setModalShow] = useState(false);
+	const payable_amount = props.gross-props.paid;
 
   return (
     <>
@@ -221,7 +282,7 @@ function InvoiceActions(props){
 				<Button variant="success" onClick={() => setModalShow(true)} >Pay Now</Button>
 			</Row>
       <InvoicePaymentForm 
-        amount={props.amount}
+        amount={payable_amount}
         addPayment={props.onAddPayment}
         show={modalShow}
         onHide={() => setModalShow(false)}
@@ -236,10 +297,10 @@ export default function Invoice(props){
 	const gross = items.map(h=>h.amount).reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
 	const paid = payments.map(h=>h.amount).reduce((a, b) => parseFloat(a) + parseFloat(b), 0)
 
-	const handlePayment = (payment, cb) => {
+	const handlePayment = (payment, callback) => {
 		axios.post('invoices/'+props.invoice.id+'/invoice_payments', payment).then((resp)=>{
 			setPayments(prevState => [...prevState, resp.data]);
-			cb();
+			callback();
 		});
 	}
 
@@ -320,9 +381,14 @@ export default function Invoice(props){
 					<AddInvoiceItem onAdd={handleAdd}/>	 
 					<InvoiceTotal gross={gross} paid={paid} />
 				</tbody>
-			</Table>			
-		</Row>  
-		<InvoiceActions onAddPayment={handlePayment} amount={gross-paid} />
+			</Table>	
+			<Row>
+				<PaymentHistory  history={payments} />
+				<InvoiceActions onAddPayment={handlePayment} gross={gross} paid={paid} />	
+			</Row>	
+		</Row>
+	
+		
 	</Container>
 	);
 }

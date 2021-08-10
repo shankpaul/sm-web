@@ -45,7 +45,7 @@ export default function CreateInvoice(props){
     {state.invoice.id && <Invoice invoice={state.invoice} 
                   service={state.service} 
                   onSave={handleSave} 
-                  onPayment={handlePayment} />}
+                  onPayment={handlePayment} disptach={props.dispatch} />}
     </>
     );
 }
