@@ -4,6 +4,7 @@ import {UserRole} from '../index'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 import {useParams, useHistory, Link} from "react-router-dom";
+import { serialize } from 'object-to-formdata';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -15,7 +16,8 @@ const initialState = {
 	password: '',
 	password_confirmation: '',
 	roles:[], 
-	errors: []
+	errors: [],
+	avatar: ''
 }
 
 export default function CreateUser(props){
@@ -48,8 +50,12 @@ export default function CreateUser(props){
 	}
 
 	const create = () =>{
+
+		const form_data = serialize(user)
+
+
 		// let data = {...owner, vehicle_ids: vehicles.map(item => item['id']) }
-		axios.post('users', user).then((resp) => {
+		axios.post('users', form_data).then((resp) => {
 			props.dispatch({type: 'create', payload: resp.data})
 			NotificationManager.success('User Created', 'Success');
 			setUser(initialState);
@@ -65,7 +71,13 @@ export default function CreateUser(props){
 		// 					 delete: item['delete'] ? true : false}
 		// })
 		// let data = {...owner, vehicle_ids: vehicle_ids }
-		axios.put('users/'+user.id, user).then((resp) => {
+
+		const form_data = new FormData();
+		for ( let key in user ) {
+		   form_data.append(key, user[key]);
+		}
+
+		axios.put('users/'+user.id, form_data).then((resp) => {
 			props.dispatch({type: 'update', payload: resp.data})
 			NotificationManager.success('User Updated', 'Success');
 			setUser(initialState);
@@ -83,6 +95,10 @@ export default function CreateUser(props){
   	{
   		setUser(prevState => ({...prevState, roles: roles}))
   	}
+  }
+
+  const handleImageChange = (event) => {
+  	setUser(prevState => ({...prevState, avatar: event.target.files[0]}) )
   }
 
 	return(
@@ -111,6 +127,11 @@ export default function CreateUser(props){
 			  <Form.Group className="mb-3" controlId="Form.ControlTextarea6">
 			    <Form.Label>Password Confirmation</Form.Label>
 			    <Form.Control type="password" name="password_confirmation" value={user.password_confirmation} placeholder="Password Confirmation"  onChange={handleChange} />
+			  </Form.Group>
+
+			  <Form.Group className="mb-3" controlId="Form.ControlTextarea6">
+			    <Form.Label>Profile Picture</Form.Label>
+			    <Form.Control type="file" name="avatar" onChange={handleImageChange} placeholder="Profile Picture" />
 			  </Form.Group>
 
 			  <UserRole selected_roles={user.roles} onChange={handleRoleChange}/>
