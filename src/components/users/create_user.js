@@ -51,11 +51,8 @@ export default function CreateUser(props){
 
 	const create = () =>{
 
-		const form_data = serialize(user)
-
-
 		// let data = {...owner, vehicle_ids: vehicles.map(item => item['id']) }
-		axios.post('users', form_data).then((resp) => {
+		axios.post('users', serialize(user)).then((resp) => {
 			props.dispatch({type: 'create', payload: resp.data})
 			NotificationManager.success('User Created', 'Success');
 			setUser(initialState);
@@ -72,12 +69,7 @@ export default function CreateUser(props){
 		// })
 		// let data = {...owner, vehicle_ids: vehicle_ids }
 
-		const form_data = new FormData();
-		for ( let key in user ) {
-		   form_data.append(key, user[key]);
-		}
-
-		axios.put('users/'+user.id, form_data).then((resp) => {
+		axios.put('users/'+user.id, serialize(user)).then((resp) => {
 			props.dispatch({type: 'update', payload: resp.data})
 			NotificationManager.success('User Updated', 'Success');
 			setUser(initialState);
