@@ -16,8 +16,7 @@ const initialState = {
 	password: '',
 	password_confirmation: '',
 	roles:[], 
-	errors: [],
-	avatar: ''
+	errors: []
 }
 
 export default function CreateUser(props){

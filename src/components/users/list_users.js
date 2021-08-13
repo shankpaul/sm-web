@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Table} from 'react-bootstrap';
+import {Button, Table, Image} from 'react-bootstrap';
 import {NotificationManager} from 'react-notifications';
 import axios from 'axios';
 import {Link, useHistory} from "react-router-dom";
@@ -20,6 +20,7 @@ export default function ListUsers(props){
 		<Table striped bordered hover size="sm">
 			<thead>
 			<tr>
+				<th></th>
 				<th>Name</th>
 				<th>Phone</th>
 				<th>Email</th>
@@ -30,6 +31,7 @@ export default function ListUsers(props){
 		{props.loading && <tr><td colSpan="6">Loading..</td></tr>}
 		{props.users.map(user => 
 			<tr key={user.id}>
+				<td><img src={user.avatar_url}  width="50" /></td>
 				<td>{user.name}</td>
 				<td>{user.phone}</td>
 				<td>{user.email}</td>

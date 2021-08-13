@@ -4,7 +4,10 @@ import {OwnerSearch} from '../index'
 import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 import {useParams, useHistory} from "react-router-dom";
+import { serialize } from 'object-to-formdata';
+import Camera,{FACING_MODES}from 'react-html5-camera-photo';
 
+import 'react-html5-camera-photo/build/css/index.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const initialState = {
@@ -19,7 +22,10 @@ const initialState = {
 	vin_number: '',
 	reg_number: '',
 	owner_id:'',
-	owner: {}
+	owner: {},
+	images:[],
+	camera:[],
+	image_urls:[]
 }
 
 export default function CreateVehicle(props){
@@ -48,7 +54,7 @@ export default function CreateVehicle(props){
 	}
 
 	const create = () =>{
-		axios.post('vehicles',vehicle).then((resp) => {
+		axios.post('vehicles', serialize(vehicle)).then((resp) => {
 			props.dispatch({type: 'create', payload: resp.data})
 			NotificationManager.success('Vehicle Created', 'Success');
 			setVehicle(initialState);
@@ -57,7 +63,7 @@ export default function CreateVehicle(props){
 	}
 
 	const update = () =>{
-		axios.put('vehicles/'+vehicle.id, vehicle).then((resp) => {
+		axios.put('vehicles/'+vehicle.id, serialize(vehicle)).then((resp) => {
 			props.dispatch({type: 'update', payload: resp.data})
 			NotificationManager.success('Vehicle Updated', 'Success');
 			setVehicle(initialState);
@@ -74,6 +80,25 @@ export default function CreateVehicle(props){
   	let key = event.target.name
   	setVehicle(prevState => ({...prevState, [key]: event.target.value}) )
   }
+
+  const handleImageChange = (event) => {
+  	setVehicle(prevState => ({...prevState, images: [...vehicle.images,...event.target.files]}) )
+  }
+
+  const handlePhoto = (cam_data) => {
+  	console.log(vehicle.camera)
+  	let images = vehicle.camera ? [...vehicle.camera, cam_data] : [cam_data];
+  	setVehicle(prevState => ({...prevState, camera: images }) )
+  }
+
+  const handleImageDelete = (item_key) => {
+  	// setVehicle(prevState => prevState.images.map((item, key)=>{
+   //  	if(key!==item_key){
+   //  		return item;
+   //  	}
+   //  }))
+  }
+
 
 	return(
 		<div>
@@ -128,6 +153,16 @@ export default function CreateVehicle(props){
 			    <Form.Control type="text" value={vehicle.color} name="color" placeholder="Color" onChange={handleChange} />
 			  </Form.Group> 
 
+			   <Form.Group className="mb-3" controlId="Form.ControlTextarea6">
+			    <Form.Label>Vehicle Pictures</Form.Label>
+			    <input type="file" multiple="multiple" accept="image/*" capture="environment" onChange={handleImageChange} placeholder="Vehicle Picture" />
+			    {/*<Camera onTakePhoto={handlePhoto} idealFacingMode={FACING_MODES.ENVIRONMENT} isImageMirror={false} />
+			    <Form.Control type="file" capture multiple name="images"  />*/}
+			  </Form.Group>
+
+			  <ImagePreview images={vehicle.images} handleImageDelete={handleImageDelete} />
+
+
 			 
 			  
 			  <Button type="submit">Save</Button>
@@ -135,3 +170,19 @@ export default function CreateVehicle(props){
 		</div>
 	);
 }
+
+
+ const ImagePreview = (props) => {
+  return (
+    <div>
+    {
+    	props.images && props.images.map((image, key) => 
+    		<div>
+    		<img key={key} width="150" src={ URL.createObjectURL(image) } />
+    		<Button onClick={props.handleImageDelete(key)}>delete</Button>
+    		</div>
+    	)
+    }
+    </div>
+  );
+};
