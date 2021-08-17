@@ -5,9 +5,9 @@ import axios from 'axios';
 import {NotificationManager} from 'react-notifications';
 import {useParams, useHistory} from "react-router-dom";
 import { serialize } from 'object-to-formdata';
-import Camera,{FACING_MODES}from 'react-html5-camera-photo';
+// import Camera,{FACING_MODES}from 'react-html5-camera-photo';
 
-import 'react-html5-camera-photo/build/css/index.css';
+// import 'react-html5-camera-photo/build/css/index.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
 	owner: {},
 	images:[],
 	camera:[],
-	image_urls:[]
+	deleted_image_ids:[]
 }
 
 export default function CreateVehicle(props){
@@ -33,6 +33,7 @@ export default function CreateVehicle(props){
 	let history = useHistory();
 
 	const [vehicle, setVehicle] = useState(initialState)
+	const [vehicle_images, setVehicleImages] = useState([])
 
 	useEffect(()=>{
 		if(params.id){
@@ -43,7 +44,16 @@ export default function CreateVehicle(props){
 	const loadVehicle = (id) => {
 		let obj = {}
 		axios.get('vehicles/'+id).then((resp)=>{
-			Object.keys(initialState).forEach((item) => { obj[item]=resp.data[item] })
+			Object.keys(initialState).forEach((item) => { 
+				if(typeof(resp.data[item])!=='undefined'){
+				 obj[item]=resp.data[item];
+				}
+			})
+
+			if(resp.data.image_urls.length >0)
+			{
+				setVehicleImages(resp.data.image_urls);
+			}
 			setVehicle(prevState =>({...prevState, ...obj}))
 		});
 	}
@@ -82,7 +92,7 @@ export default function CreateVehicle(props){
   }
 
   const handleImageChange = (event) => {
-  	setVehicle(prevState => ({...prevState, images: [...vehicle.images,...event.target.files]}) )
+  	setVehicle(prevState => ({...prevState, images: [...vehicle.images, ...event.target.files]}) )
   }
 
   const handlePhoto = (cam_data) => {
@@ -91,14 +101,18 @@ export default function CreateVehicle(props){
   	setVehicle(prevState => ({...prevState, camera: images }) )
   }
 
-  const handleImageDelete = (item_key) => {
-  	// setVehicle(prevState => prevState.images.map((item, key)=>{
-   //  	if(key!==item_key){
-   //  		return item;
-   //  	}
-   //  }))
+  const handleImageDelete = (key, file) => {
+  	let deleted_image_ids = vehicle.deleted_image_ids;
+  	if(typeof(file.id)!=='undefined'){
+  		deleted_image_ids = [...deleted_image_ids, file['id']]
+  		setVehicleImages(prevState => (vehicle_images.filter((item) => item.id!==file.id)))
+  		setVehicle(prevState => ({...prevState, deleted_image_ids: deleted_image_ids }))
+  	}
+  	else
+  	{
+  		setVehicle(prevState => ({...prevState, images: vehicle.images.filter((item, index) => index!==key) }))
+  	} 	
   }
-
 
 	return(
 		<div>
@@ -160,10 +174,7 @@ export default function CreateVehicle(props){
 			    <Form.Control type="file" capture multiple name="images"  />*/}
 			  </Form.Group>
 
-			  <ImagePreview images={vehicle.images} handleImageDelete={handleImageDelete} />
-
-
-			 
+			  <ImagePreview images={[...vehicle.images, ...vehicle_images]} handleImageDelete={handleImageDelete} />
 			  
 			  <Button type="submit">Save</Button>
 			</Form>
@@ -171,15 +182,14 @@ export default function CreateVehicle(props){
 	);
 }
 
-
  const ImagePreview = (props) => {
   return (
     <div>
     {
     	props.images && props.images.map((image, key) => 
-    		<div>
-    		<img key={key} width="150" src={ URL.createObjectURL(image) } />
-    		<Button onClick={props.handleImageDelete(key)}>delete</Button>
+    		<div key={key} >
+	    		<img width="150" src={ typeof(image.id)==='undefined'? URL.createObjectURL(image) : image.url } />
+	    		<Button onClick={()=>props.handleImageDelete(key, image)}>delete</Button>
     		</div>
     	)
     }
